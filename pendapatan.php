@@ -37,7 +37,7 @@
 	
 	$today = $year . '-' . $month . '-' . $day;
 
-	$pendapatan = query("SELECT * FROM pendapatan WHERE tanggal = '$today' AND username = '$ambilNama'");
+	$pemasukkan = query("SELECT * FROM pemasukkan WHERE tanggal = '$today' AND username = '$ambilNama'");
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="shortcut icon" href="img/favicon.png">
-	<title>Penran-Dakhi - Pendapatan</title>
+	<title>Penran-Dakhi - Pemasukkan</title>
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -119,11 +119,11 @@
 						</div>
 					</li>
 
-					<a href="pendapatan" class="linkAktif">
+					<a href="pemasukkan" class="linkAktif">
 						<li id="panel" class="aktif" style="border-left: 5px solid #306bff;">
 							<div style="margin-left: 20px;">
 									<span><i class="fas fa-file-invoice-dollar"></i></span>
-									<span>Data Pendapatan</span>
+									<span>Data Pemasukkan</span>
 							</div>
 						</li>
 					</a>
@@ -147,11 +147,11 @@
 						</div>
 					</li>
 
-					<a href="tambahPendapatan" class="linkAktif">
+					<a href="tambahPemasukkan" class="linkAktif">
 						<li id="panel3" style="display: none;">
 							<div style="margin-left: 20px;">
 									<span><i class="fas fa-file-invoice-dollar"></i></span>
-									<span>Pendapatan</span>
+									<span>Pemasukkan</span>
 							</div>
 						</li>
 					</a>
@@ -199,7 +199,7 @@
 	<div class="main-content khusus">
 		<div class="konten khusus2">
 			<div class="konten_dalem khusus3">
-					<h2 class="head" style="color: #4b4f58;">Pendapatan</h2>
+					<h2 class="head" style="color: #4b4f58;">Pemasukkan</h2>
 					<hr style="margin-top: -2px;">
 
 					<!-- bagian filter dan pencarian -->
@@ -232,7 +232,7 @@
 					
 					<!-- bagian isi tabel -->
 					<div class="headline">
-						<h5>Data Pendapatan</h5>
+						<h5>Data Pemasukkan</h5>
 					</div>
 					<div class="container" id="container">
 						<div class="row tampil" id="row">
@@ -242,13 +242,13 @@
 											<tr>
 													<th>No.</th>
 													<th>Tanggal</th>
-													<th>Sumber Pendapatan</th>
-													<th>Keterangan Pendapatan</th>
-													<th>Jumlah Pendapatan</th>
+													<th>Keterangan Pemasukkan</th>
+													<th>Sumber Pemasukkan</th>
+													<th>Jumlah Pemasukkan</th>
 													<th>Aksi</th>
 											</tr>
 											<?php $i = 1; ?>
-											<?php foreach ($pendapatan as $row) : ?>
+											<?php foreach ($pemasukkan as $row) : ?>
 											<tr class="show" id="<?= $row['id'] ?>">
 													<td> <?= $i ?> </td>
 													<td data-target="tanggal"><?= htmlspecialchars($row['tanggal']) ?></td>
@@ -275,7 +275,7 @@
 											
 											<?php if(isset($jumlah2) != null) :?>
 											<tr>
-													<td colspan="4">Total Pendapatan</td>
+													<td colspan="4">Total Pemasukkan</td>
 													<td id="total" data-target="total"><?= $hasilJumlah ?></td>
 											</tr>
 											<?php endif; ?>
@@ -301,7 +301,7 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Pendapatan</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Pemasukkan</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -315,22 +315,24 @@
 							<input type="date" value="<?= $today ?>" name="tanggal" class="form-control" id="tanggalTambah" required>
 						</div>
 						<div class="form-group">
-							<label>Masukkan Keterangan Pendapatan</label>
+							<label>Masukkan Keterangan Pemasukkan</label>
 							<input type="text" name="keterangan" class="form-control" id="keteranganTambah" required>
 						</div>
 						<div class="form-group">
-							<label>Masukkan Sumber Pendapatan</label>
+							<label>Masukkan Sumber Pemasukkan</label>
 							<select name="sumber" class="form-control" id="sumberTambah">
-									<option>ATM</option>
-									<option>Pemberian</option>
-									<option>Piutang</option>
-									<option>Laba penjualan</option>
-									<option>Pekerjaan</option>
-									<option>Lain - lain</option>
+									<option>Nias</option>
+									<option>Gunungsitoli</option>
+									<option>Sibolga</option>
+									<option>Tarutung</option>
+									<option>Medan</option>
+									<option>Dumai</option>
+									<option>Jakarta</option>
+									<option>Lain-lain</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Masukkan Jumlah Pendapatan</label>
+							<label>Masukkan Jumlah Pemasukkan</label>
 							<input type="text" id="jumlahTambah" name="jumlah" class="form-control" onkeydown="return numbersonly(this, event);"
 									onkeyup="javascript:tandaPemisahTitik(this);" required>
 						</div>
@@ -350,7 +352,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">Ubah Data Pendapatan</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle">Ubah Data Pemasukkan</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -363,18 +365,20 @@
 							<input type="date" class="form-control" id="tanggal" required>
 						</div>
 						<div class="form-group">
-							<label for="keterangan">Keterangan Pendapatan</label>
+							<label for="keterangan">Keterangan Pemasukkan</label>
 							<input type="text" class="form-control" id="keterangan" required>
 						</div>
 						<div class="form-group">
-							<label for="sumber">Sumber Pendapatan</label>
+							<label for="sumber">Sumber Pemasukkan</label>
 							<select class="form-control" id="sumber">
-									<option>ATM</option>
-									<option>Pemberian</option>
-									<option>Piutang</option>
-									<option>Laba penjualan</option>
-									<option>Pekerjaan</option>
-									<option>Lain - lain</option>
+							<option>pemasukkan</option>
+									<option>Gunungsitoli</option>
+									<option>Sibolga</option>
+									<option>Tarutung</option>
+									<option>Medan</option>
+									<option>Dumai</option>
+									<option>Jakarta</option>
+									<option>Lain-lain</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -403,11 +407,11 @@
 	</script>
 
 	<script src="js/bootstrap.js"></script>
-	<script src="ajax/js/filterPendapatan.js"></script>
-	<script src="ajax/js/tambahPendapatan.js"></script>
-	<script src="ajax/js/deletePendapatan.js"></script>
-	<script src="ajax/js/cariPendapatan.js"></script>
-	<script src="ajax/js/updatePendapatan.js"></script>
+	<script src="ajax/js/filterPemasukkan.js"></script>
+	<script src="ajax/js/tambahPemasukkan.js"></script>
+	<script src="ajax/js/deletePemasukkan.js"></script>
+	<script src="ajax/js/cariPemasukkan.js"></script>
+	<script src="ajax/js/updatePemasukkan.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </body>
